@@ -1,0 +1,14 @@
+# Folder Python cache
+__pycache__/
+*.pyc
+
+# Virtual environment
+venv/
+.env/
+
+# Data sementara
+*.csv
+*.xlsx
+
+# VSCode
+.vscode/
