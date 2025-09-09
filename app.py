@@ -29,6 +29,7 @@ else:
         else:
             data = pd.read_excel(upload_file)
 
+        
         # Bersihkan data
         data = data.dropna(how="all")
         data = data.dropna(axis=1, how="all")
@@ -37,7 +38,35 @@ else:
         # Simpan di session_state
         st.session_state["data"] = data
         st.success("File berhasil diupload!")
-        with st.expander("Lihat Ini"):
+        with st.expander("Kualitas File Anda"):
+            rows, cols = data.shape
+            st.write(f"File terbaca: **{rows} baris, {cols} kolom**")
+            missing = data.isnull().sum()
+            missing_percent = (missing / len(data)) * 100
+            for col, val in missing_percent.items():
+                if val > 0:
+                    st.write(f"Kolom **{col}**: {val:.1f}% kosong")
+    
+            for col in data.columns:
+                numeric_col = pd.to_numeric(data[col], errors="coerce")
+
+                if numeric_col.notnull().sum() > 0:  # ada angka valid
+                    st.write(f"Kolom **{col}**: min={numeric_col.min()}, max={numeric_col.max()}")
+
+                    if numeric_col.isnull().sum() > 0:
+                        st.warning(f"Kolom {col} ada nilai non-numeric!")
+
+        # Deteksi kolom teks yang harusnya numeric (ID/EAN)
+            for col in data.columns:
+                if data[col].dtype == "object":
+                    # cek kalau mayoritas berupa angka
+                    numeric_ratio = data[col].str.isnumeric().mean()
+                    if numeric_ratio > 0.8:
+                        lengths = data[col].dropna().astype(str).str.len().value_counts()
+                        if len(lengths) > 1:
+                            st.warning(f"Kolom **{col}** panjangnya tidak konsisten.")
+                            st.write(f"Distribusi panjang {col}:")
+                            st.write(lengths)
             st.warning("Program ini masih level MVP artinya tdk semua file csv/excel akan berhasil diupload")
         st.divider()
 
@@ -76,22 +105,20 @@ with col1:
                         filtered = filtered[filtered[col].isin(selected)]
 
                 st.success("Filter berhasil diterapkan!")
-                st.divider()
-    
         except Exception as e:
             st.error(f"Gagal memproses filter: {e}")
-            st.divider()
+    
     else:
         st.warning("Belum ada data. Silakan upload file terlebih dahulu di menu Tambah Produk.")
-        st.divider()
+    st.divider()
 with col2:
     st.header("Visualisasi data")
     if filtered is None:
         st.warning("Belum ada data. Silakan upload file terlebih dahulu di menu Tambah Produk.")
-        st.divider()
+        
     else:
         col_chart = st.selectbox("Pilih kolom untuk divisualisasikan", filtered.columns)
-        st.divider()
+    st.divider()
         
 # ================= KATALOG =================
 
