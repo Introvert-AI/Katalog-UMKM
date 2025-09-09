@@ -5,6 +5,26 @@
 Deskripsi singkat tentang project ini.  
 Aplikasi Streamlit untuk menampilkan data, filter, dan visualisasi sederhana.
 
+## ✨ Fitur Utama
+
+📂 Upload file (CSV/Excel).
+
+📑 Tampilkan data dalam bentuk tabel.
+
+🔎 Filter data untuk eksplorasi lebih mudah.
+
+📊 Visualisasi data dengan chart interaktif.
+
+🕵️ Data Quality Checker (Generik) – fitur tambahan:
+
+ Jumlah baris & kolom.
+
+ Deteksi missing values per kolom.
+
+ Deteksi kolom numeric → min, max, & nilai non-numeric.
+
+ Deteksi kolom teks numeric (ID/EAN) → konsistensi panjang.
+
 ## 🚀 Cara Menjalankan
 
 1. Clone repository ini
