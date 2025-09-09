@@ -38,14 +38,6 @@ Aplikasi Streamlit untuk menampilkan data, filter, dan visualisasi sederhana.
     ```bash
     streamlit run app.py
 
-## 📌 Fitur
-
-1. Upload file csv/excel
-2. Tampilan data dalam bentuk tabel
-3. Filter produk berdasarkan kategori
-4. Tampilan hasil filter dalam bentuk tabel
-5. visualisasi data berdasarkan kolom
-
 ## 🤝 Kontribusi
 
 Kontribusi sangat diterima!
@@ -99,13 +91,6 @@ Text-numeric columns (ID/EAN) → length consistency.
    ```bash
    streamlit run app.py
  
-## 📌 Features
-1. Upload CSV/Excel files
-2. Display data in a table
-3. Filter products by category
-4. Display filtered results in a table
-5. Visualize data based on columns
-
 ## 🤝 Contribution
 
 Contributions are welcome!
